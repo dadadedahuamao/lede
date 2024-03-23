@@ -176,12 +176,14 @@ detect_mac80211() {
 			set wireless.radio${devidx}.htmode=$htmode
 			set wireless.radio${devidx}.disabled=0
 			set wireless.radio${devidx}.country=US
+			set wireless.default_radio${devidx}.encryption=psk2
+      set wireless.default_radio${devidx}.key=123456789
 
 			set wireless.default_radio${devidx}=wifi-iface
 			set wireless.default_radio${devidx}.device=radio${devidx}
 			set wireless.default_radio${devidx}.network=lan
 			set wireless.default_radio${devidx}.mode=ap
-			set wireless.default_radio${devidx}.ssid=OpenWrt
+			set wireless.default_radio${devidx}.ssid=Dahuamao_$(cat /sys/class/ieee80211/${dev}/macaddress|awk -F ":" '{print $4""$5""$6 }'| tr a-z A-Z)
 			set wireless.default_radio${devidx}.encryption=none
 EOF
 		uci -q commit wireless
